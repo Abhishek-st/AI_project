@@ -60,7 +60,7 @@ def generate_text(model, start_string, generation_length=250):
 def index():
   return render_template('index.html')
 
-@app.route('/download')
+@app.route('/down')
 def down():
   generated_text = generate_text(model, start_string="X", generation_length=250)
   file = open('gen.abc', 'w') 
@@ -68,10 +68,11 @@ def down():
   file.close()
   mdl.lab1.abc2wav('gen.abc')
   sound = pydub.AudioSegment.from_wav("gen.wav")
-  sound.export("ast.mp3", format="mp3")
+  sound.export("astsat.mp3", format="mp3")
+  print('ye kya ho rha hai')
 
   timestr = time.strftime("%Y%m%d-%H%M%S")
-  return send_file('ast.mp3', attachment_filename='test.mp3' + timestr, as_attachment=True, cache_timeout=0)
+  return send_file('astsat.mp3', attachment_filename='test' + timestr +'.mp3', as_attachment=True, cache_timeout=0)
 
 
 if __name__ =='__main__':
